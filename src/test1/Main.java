@@ -137,20 +137,22 @@ class Frame extends JFrame {
 	public void initExtensionList() {
 		try {
 			File file = new File("Output.txt");
-
-			if (file.exists()) {
-				FileReader fileReader = new FileReader(file);
-				BufferedReader bufferedReader = new BufferedReader(fileReader);
-				String line = "";
-				while ((line = bufferedReader.readLine()) != null) {
-					if (Arrays.asList(fixedExtensions).contains(line)) {
-						checkBoxList[Arrays.asList(fixedExtensions).indexOf(line)].setSelected(true);
-					} else {
-						addNewCustomExtension(line);
-					}
-				}
-				bufferedReader.close();
+			if (!file.exists()) {
+				return;
 			}
+
+			FileReader fileReader = new FileReader(file);
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+			String line = "";
+			while ((line = bufferedReader.readLine()) != null) {
+				if (Arrays.asList(fixedExtensions).contains(line)) {
+					int index = Arrays.asList(fixedExtensions).indexOf(line);
+					checkBoxList[index].setSelected(true);
+				} else {
+					addNewCustomExtension(line);
+				}
+			}
+			bufferedReader.close();
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
@@ -210,7 +212,7 @@ class Frame extends JFrame {
 	}
 }
 
-public class main {
+public class Main {
 	public static void main(String[] args) {
 		new Frame();
 	}
