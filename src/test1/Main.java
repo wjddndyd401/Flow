@@ -90,7 +90,8 @@ class Frame extends JFrame {
 		newExtensionInput.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
 				// 입력 최대 길이 제한
-				if (((JTextField) e.getSource()).getText().length() >= maxExtensionLength) {
+				JTextField textField = (JTextField) e.getSource();
+				if (textField.getText().length() >= maxExtensionLength) {
 					e.consume();
 				}
 			}
